@@ -14,7 +14,7 @@ $('#frm-phone').submit(function(e){
 	//2-> VALIDO EL CODIGO 
 
 	let proceso 	=	$(this).data('proceso');
-	console.log('Proceso ', proceso);
+	console.log('Proceso aaa ', proceso);
 
 	if(proceso == 1){
 		enviarSMS();

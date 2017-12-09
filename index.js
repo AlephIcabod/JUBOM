@@ -4,7 +4,8 @@ logger = require('morgan'),
 cookieParser = require('cookie-parser'),
 bodyParser = require('body-parser'),
 cors = require("cors"),
-app = express()
+app = express(),
+pago=require("./pago")
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +31,14 @@ app.get("/app",(req,res)=>{
 app.get("/asociar",(req,res)=>{
   res.render("asociar")
 })
+
+app.get("/creditos",(req,res)=>{
+  res.render("creditos")
+})
+
+app.use("/checkout",pago)
+
+
 app.use(express.static("public"))
 
 // catch 404 and forward to error handler

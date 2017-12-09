@@ -10,7 +10,7 @@ const verificarSesion=(cb,cb2)=>{
             Content.classList.remove("hide")            
             if(cb) cb(user,cb2)
             if (window.location.pathname=="/"){
-                window.location.href="/app"
+                window.location.href="/app"                           
             }
         }else{            
             Loading.classList.add("hide")      
@@ -59,12 +59,12 @@ function LoginRedes(prov){
         window.location.href="/app"
     }).catch(function(error) {
         console.log(error)
-        alert("No se pudo iniciar sesion")
+        alert(error)
     });
 }
 
 
-function obtenerDatosUsuario(user,cb){
+function obtenerDatosUsuario(user,cb){     
     let database=firebase.database();
     let encontrado=false;
     let usuarioEncontrado;
@@ -76,15 +76,16 @@ function obtenerDatosUsuario(user,cb){
                 encontrado=true
                 usuarioEncontrado=child
             }
-        });
-
+        });        
         if (!encontrado){
             usuarioEncontrado=usuario.push({
                 uid:user.uid,
                 nombre:user.displayName||user.email||user.phoneNumber,
                 creditos:50
             })
+            
         }
+        localStorage.setItem("userKey",usuarioEncontrado.key)
         if (cb) cb(usuarioEncontrado);
     })
 }
@@ -109,7 +110,8 @@ function obtenerDatosUsuario(user,cb){
       }
     $(".button-collapse").sideNav();
     $('ul.tabs').tabs();
-     $('.modal').modal();     
+     $('.modal').modal();
+     $('select').material_select();     
 })()
 
 
