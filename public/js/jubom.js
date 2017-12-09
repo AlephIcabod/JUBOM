@@ -3,12 +3,12 @@ const Loading=document.getElementById("loading")
 const Content=document.getElementById("content")
 var usuario
 
-const verificarSesion=(cb)=>{
+const verificarSesion=(cb,cb2)=>{
     firebase.auth().onAuthStateChanged(function(user) {        
         if (user) {
             Loading.classList.add("hide")      
             Content.classList.remove("hide")            
-            if(cb) cb(user)
+            if(cb) cb(user,cb2)
             if (window.location.pathname=="/"){
                 window.location.href="/app"
             }
@@ -64,7 +64,7 @@ function LoginRedes(prov){
 }
 
 
-function obtenerDatosUsuario(user){
+function obtenerDatosUsuario(user,cb){
     let database=firebase.database();
     let encontrado=false;
     let usuarioEncontrado;
@@ -74,7 +74,7 @@ function obtenerDatosUsuario(user){
             let uid=child.val().uid
             if (uid==user.uid){
                 encontrado=true
-                usuarioEncontrado=child.val()
+                usuarioEncontrado=child
             }
         });
 
@@ -85,7 +85,7 @@ function obtenerDatosUsuario(user){
                 creditos:50
             })
         }
-        console.log("encontrado",usuarioEncontrado,usuarioEncontrado.key)
+        if (cb) cb(usuarioEncontrado);
     })
 }
 (function (){
@@ -98,10 +98,9 @@ function obtenerDatosUsuario(user){
         messagingSenderId: "592109724621"
       };
       firebase.initializeApp(config);
-      verificarSesion(obtenerDatosUsuario);
-
-
-
+      verificarSesion(obtenerDatosUsuario,function(usuario){          
+        document.getElementById("creditosU").innerText=usuario.val().creditos
+      });
 
       if (btnCerrar){
           btnCerrar.addEventListener("click",e=>{              
