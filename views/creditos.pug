@@ -1,0 +1,20 @@
+extends layout
+block content
+    include navbar.pug
+    main.container#content.hide
+        .input-field.col.s12
+            select#montoCreditos
+                option(value="",disabled,selected) Número de creditos
+                option(value="10.00") 10 créditos  
+                option(value="20.00") 20 créditos                    
+                option(value="30.00") 30 créditos                    
+                option(value="50.00") 50 créditos                    
+                option(value="100.00") 100 créditos
+            label Comprar créditos
+        #dropin-wrapper
+            #checkout-message
+            #dropin-container
+            button#submit-button Pagar
+block scripts
+    script(src="https://js.braintreegateway.com/web/dropin/1.9.1/js/dropin.min.js")
+    script(src="/js/creditos.js")
