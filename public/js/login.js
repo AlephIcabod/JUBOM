@@ -29,7 +29,7 @@ $('#frm-phone').submit(function(e){
 enviarSMS = function(){
 
 	let phone = $('#phone').intlTelInput("getNumber");
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 	firebase.auth().signInWithPhoneNumber(phone, recaptchaVerifier)
 		    .then(function (confirmationResult) {
 		      // SMS sent. Prompt user to type the code from the message, then sign the

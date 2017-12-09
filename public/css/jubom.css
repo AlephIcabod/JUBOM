@@ -51,6 +51,22 @@ body {
       width: 100% !important;
   }
 
+.social{ 
+    background-color:black;
+    margin:0 5px;
+}
+
+.icon-facebook{
+    background-color: #4267b2;
+}
+
+.icon-twitter{
+    background-color:#1da1f2;
+}
+.icon-gmail{
+    background-color:#d14836;
+}
+
 @media only screen and (max-width: 992px){
 .modal {
     width: 95%;

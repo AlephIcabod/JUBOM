@@ -1,10 +1,10 @@
 extends layout
 block content
     .section
-    main
+    main#content.hide
         center
             .section
-            .indigo-text Regístrese con su celular
+            h5.center Regístrese con su celular
             .section
             .container
                 .z-depth-1.grey.lighten-4.row(style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;")
@@ -32,8 +32,13 @@ block content
                                 button(type='submit',id="btn_phone" name='btn_phone',disabled,class='col s12 btn btn-large waves-effect indigo') Enviar SMS
                             .row
                                 button(type="button",onclick="reiniciar()",id="btn_change", style="display: none", class='col s12 btn btn-large waves-effect') Cambiar Número
-        .section
-        .section
+        .row
+            h6.center Inicie sesion con sus redes sociales
+            .col.s10.offset-s1.center
+                a.btn.social.icon-facebook(onclick="LoginRedes('F')")
+                a.btn.social.icon-twitter(onclick="LoginRedes('T')")
+                a.btn.social.icon-gmail(onclick="LoginRedes('G')")
+
 block scripts
     script.
         var telInput = $("#phone"),

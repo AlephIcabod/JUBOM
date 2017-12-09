@@ -1,0 +1,14 @@
+extends layout
+block content
+    main#content.hide
+        include navbar.pug
+        .section
+            h5.center-align Asociar cuentas de sus redes sociales para inicio de sesión
+            .row
+                .col.s10.offset-s1.center#asociar
+                    a.btn.social.facebook.icon-facebook(onclick="Asociar('F')")
+                    a.btn.social.twitter.icon-twitter(onclick="Asociar('T')")
+                    a.btn.social.google.icon-gmail(onclick="Asociar('G')")
+                ul.collection.col.s10.offset-s1#asociados
+block scripts
+    script(src="/js/cuentas.js")

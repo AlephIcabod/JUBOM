@@ -7,8 +7,18 @@ html
     link(rel="stylesheet",href="css/demo.css")
     link(type="text/css",rel="stylesheet",href="css/materialize.min.css"  media="screen,projection")
     link(rel='stylesheet', href='/css/jubom.css')
+    link(href="https://file.myfontastic.com/mviSKdfhE38dRWv56TDq9E/icons.css", rel="stylesheet")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
   body
+    main#loading.center
+      .preloader-wrapper.big.active
+        .spinner-layer.spinner-blue-only
+          .circle-clipper.left
+            .circle
+          .gap-patch
+            .circle
+          .circle-clipper.right
+            .circle
     block content
     script(type="text/javascript",src="https://code.jquery.com/jquery-3.2.1.min.js")
     script(type="text/javascript",src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js")

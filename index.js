@@ -27,6 +27,9 @@ app.get("/app",(req,res)=>{
   res.render("index")
 })
 
+app.get("/asociar",(req,res)=>{
+  res.render("asociar")
+})
 app.use(express.static("public"))
 
 // catch 404 and forward to error handler

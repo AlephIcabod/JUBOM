@@ -1,8 +1,8 @@
 extends layout
 
-block content
-    include navbar.pug
-    main.container
+block content    
+    include navbar.pug    
+    main.container#content.hide
         include tabs.pug
         #reproductor.col.s12
             include reproductor.pug
