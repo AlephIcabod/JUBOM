@@ -1,0 +1,58 @@
+.cancion{
+    justify-content: space-between;
+}
+.cancion a{
+    color:rgb(38, 166, 154);
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .input-field input[type=date]:focus + label,
+  .input-field input[type=text]:focus + label,
+  .input-field input[type=email]:focus + label,
+  .input-field input[type=password]:focus + label {
+    color: #e91e63;
+  }
+
+  .input-field input[type=date]:focus,
+  .input-field input[type=text]:focus,
+  .input-field input[type=email]:focus,
+  .input-field input[type=password]:focus {
+    border-bottom: 2px solid #e91e63;
+    box-shadow: none;
+  }
+
+  
+  #error-msg,.error-msg{
+      color: red;
+      font-weight: bold;
+      padding-top: 10px;
+  }
+  #valid-msg{
+      color: green ;
+      font-weight: bold;
+      padding-top: 10px;
+  }
+
+
+  .intl-tel-input {
+      width: 100% !important;
+  }
+
+@media only screen and (max-width: 992px){
+.modal {
+    width: 95%;
+}
+}

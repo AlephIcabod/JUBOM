@@ -1,0 +1,69 @@
+extends layout
+block content
+    .section
+    main
+        center
+            .section
+            .indigo-text Regístrese con su celular
+            .section
+            .container
+                .z-depth-1.grey.lighten-4.row(style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;")
+                    form.col.s12(method="post",id="frm-phone",data-proceso="1")
+                        .row
+                            .col.s12
+                        .row
+                            label Ingrese su número
+                            .input-field.col.s12
+                                input.validate#phone(type="tel",style="width: 77% !important;")
+                                .span.hide#valid-msg(style="display: inherit;") ✓ Valido.
+                                .span.hide#error-msg(style="displat:inherit;") Número invalido            
+                        .row#div-code(style="display: none;")
+                            label(for='email') Ingrese código
+                            .input-field.col.s12
+                                input.validate(type='number',name='code' id='code')
+                                a(href="javascript:;",onclick="enviarSMS()") Reenviar código.
+                                span.error-msg#code_error
+                        .row#div-captcha              
+                            .input-field.col.s12
+                                #captha
+                        br
+                        center
+                            .row
+                                button(type='submit',id="btn_phone" name='btn_phone',disabled,class='col s12 btn btn-large waves-effect indigo') Enviar SMS
+                            .row
+                                button(type="button",onclick="reiniciar()",id="btn_change", style="display: none", class='col s12 btn btn-large waves-effect') Cambiar Número
+        .section
+        .section
+block scripts
+    script.
+        var telInput = $("#phone"),
+        errorMsg = $("#error-msg"),
+        validMsg = $("#valid-msg");
+        // initialise plugin
+        telInput.intlTelInput({
+        utilsScript: "js/utils.js"
+        });
+
+        var reset = function() {
+        telInput.removeClass("error");
+        errorMsg.addClass("hide");
+        validMsg.addClass("hide");
+        };
+
+        // on blur: validate
+        telInput.blur(function() {
+        reset();
+        if ($.trim(telInput.val())) {
+        if (telInput.intlTelInput("isValidNumber")) {
+            console.log('1');
+            $("#btn_phone").attr('disabled',false)
+          validMsg.removeClass("hide");
+        } else {
+            console.log('2');
+          $("#btn_phone").attr('disabled',true);
+          telInput.addClass("error");
+          errorMsg.removeClass("hide");
+        }
+        }
+        });
+        telInput.on("keyup change", reset);

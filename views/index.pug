@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    include navbar.pug
+    main.container
+        include tabs.pug
+        #reproductor.col.s12
+            include reproductor.pug
+        #artistas.col.s12
+            include artistas.pug
+        #albums.col.s12
+            include albums.pug
+        #canciones.col.s12
+            include canciones.pug
