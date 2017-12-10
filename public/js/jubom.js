@@ -39,8 +39,7 @@ function Asociar (prov){
     }
     firebase.auth().currentUser.linkWithPopup(provider).then(function(result) {
     var credential = result.credential;
-    var user = result.user; 
-    console.log(result)  
+    var user = result.user;     
     }).catch(function(error) {
         console.log(error)
     });
@@ -63,6 +62,15 @@ function LoginRedes(prov){
     });
 }
 
+function showLoading(){
+    let loading=document.getElementById("loading")
+    loading.classList.remove("hide")
+}
+
+function hideLoading(){
+    let loading=document.getElementById("loading")
+    loading.classList.add("hide")
+}
 
 function obtenerDatosUsuario(user,cb){     
     let database=firebase.database();
@@ -86,6 +94,7 @@ function obtenerDatosUsuario(user,cb){
             
         }
         localStorage.setItem("userKey",usuarioEncontrado.key)
+        localStorage.setItem("userID",usuarioEncontrado.val().uid)
         if (cb) cb(usuarioEncontrado);
     })
 }
@@ -98,8 +107,7 @@ function obtenerDatosUsuario(user,cb){
         storageBucket: "jubom-64471.appspot.com",
         messagingSenderId: "592109724621"
       };
-      firebase.initializeApp(config);
-      localStorage.setItem("misVideos","")
+      firebase.initializeApp(config);      
       verificarSesion(obtenerDatosUsuario,function(usuario){          
         document.getElementById("creditosU").innerText=usuario.val().creditos
       });

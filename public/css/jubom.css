@@ -80,6 +80,17 @@ body {
 #creditosU::before{
     content:"Creditos $";
 }
+
+#loading{
+    position: fixed;
+    z-index: 1000;    
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background: rgba(10,10,10,.1);
+    align-items: center;
+}
 @media only screen and (max-width: 992px){
 .modal {
     width: 95%;

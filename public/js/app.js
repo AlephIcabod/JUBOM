@@ -1,3 +1,5 @@
+var COSTO=5;
+
 const Buscar=(tipo,query)=>{
     let content=document.querySelector("#modal .modal-content");
     content.innerHTML=""
@@ -24,6 +26,7 @@ const Buscar=(tipo,query)=>{
     BuscarAlbums("a")
     BuscarArtists("a")
     BuscarCanciones("a")
+    initLista();
 })()
 
 
@@ -35,7 +38,7 @@ function BuscarCanciones(query){
         items.forEach(a => {
             canciones.innerHTML+=`
             <li class="collection-item avatar valign-wrapper cancion"
-            data-id="${a.id}" data-name="${a.name} ${a.artists[0].name} ${a.album.name}" onclick="reproducir(this)">
+            data-id="${a.id}" data-name="${a.name} ${a.artists[0].name} ${a.album.name}" data-text="${a.name}#&${a.artists[0].name}#&${a.album.name}" onclick="reproducir(this)">
             <img src="${a.album.images[0]?a.album.images[0].url:''}" alt="" class="circle" />
             <div>
             <p class="title"> ${a.name}</p>
@@ -50,16 +53,30 @@ function reproducir(el){
     let nombre=el.dataset.name;
     let userKey=localStorage.getItem("userKey")
     let database=firebase.database();
-    let cola=database.ref("/videos")   
+    let cola=database.ref("/videos")
+    let text=el.dataset.text   
     database.ref("/usuarios/"+userKey).once('value')
-    .then(snap=>{
+    .then(snap=>{        
         let uid=snap.val().uid
-
-        let video=cola.push({usuario:uid,video:nombre})        
-        let misvideos=localStorage.getItem("misVideos")
-        localStorage.setItem("misVideos",misvideos+","+video.key)
+        let creditos=snap.val().creditos
+        if (creditos>=COSTO){
+        let video=cola.push({usuario:uid,video:nombre,text:text})
+        database.ref("/usuarios/"+userKey).set({
+            nombre:snap.val().nombre,
+            uid:snap.val().uid,
+            creditos:creditos-COSTO
+        }).then((r)=>{
+            Materialize.toast("Se ha agregado una cancion a la lista",4000);
+            $("#modal").modal("close")
+        })
+        }else{
+            Materialize.toast("No tienes suficientes creditos para agregar canciones, compra más créditos",4000);
+            $("#modal").modal("close")
+        }
     });
 }
+
+
 function abrirAlbum(index){
     let id=index.dataset.id;
     let album=index.dataset.album;    
@@ -74,7 +91,7 @@ function abrirAlbum(index){
         <ul class="collection">`
         d.items.forEach(i=>{
             content.innerHTML+=`
-            <li class="collection-item avatar valign-wrapper cancion" onclick="reproducir(this)" data-name="${i.name} ${i.artists[0].name} ${album}">              
+            <li class="collection-item avatar valign-wrapper cancion" onclick="reproducir(this)" data-name="${i.name} ${i.artists[0].name} ${album}" data-text="${i.name}#&${i.artists[0].name}#&${album}">              
               <div>
                 <p class="title">${i.name}</p>              
                 <small> ${i.artists[0].name} -- $5 </small>
@@ -128,14 +145,13 @@ function abrirArtista(el){
     Loading.classList.remove('hide')
     fetch("/busqueda/artista/"+id)
     .then(r=>r.json())
-    .then(d=>{
-        console.log(d)
+    .then(d=>{        
         Loading.classList.add('hide')
         content.innerHTML+=`
         <ul class="collection">`
         d.tracks.forEach(i=>{
             content.innerHTML+=`
-            <li class="collection-item avatar valign-wrapper cancion" onclick="reproducir(this)" data-name="${i.name} ${i.album.name} ${artista}">              
+            <li class="collection-item avatar valign-wrapper cancion" onclick="reproducir(this)" data-name="${i.name} ${artista} ${i.album.name}" data-text="${i.name}#&${artista}#&${i.album.name}">              
               <div>
                 <p class="title">${i.name}</p>              
                 <small> ${i.album.name} -- $5 </small>
@@ -167,4 +183,59 @@ function BuscarArtists(query){
               
         });
     })
+}
+
+function initLista(){
+    let database=firebase.database();
+    let cola=database.ref("/videos")
+    let lista=document.getElementById("reproductorList")   
+    lista.innerHTML="";
+    let user=localStorage.getItem("userID")
+    showLoading();    
+    cola.on("child_added",function(snap){updateLista(snap)})
+    cola.on("child_removed",function(snap){removeElement(snap)})
+}
+
+function removeElement(snap){
+    let li =document.getElementById(snap.key)
+    let lista=document.getElementById("reproductorList")
+    lista.removeChild(li)
+
+}
+
+function updateLista(nuevo){    
+    let lista=document.getElementById("reproductorList"),
+    li=document.createElement("li"),
+    cancion=nuevo.val(),
+    datos=cancion.text.split("#&")
+    let user=localStorage.getItem("userID")
+    li.classList.add("collection-item","avatar")
+    li.dataset.idCancion=nuevo.key
+    li.id=nuevo.key
+    if (cancion.usuario===user){
+        li.innerHTML=`<span class="title">${datos[0]}</span>
+        <p>Artista: ${datos[1]}<br>
+           Album: ${datos[2]} 
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons red-text">delete</i></a>`
+        li.querySelector("a").addEventListener("click",(e)=>eliminarCancion(li))
+    }else{
+        li.innerHTML=`<span class="title">${datos[0]}</span>
+        <p>Artista: ${datos[1]}<br>
+           Album: ${datos[2]} 
+        </p>`
+    }
+    lista.appendChild(li)
+    
+}
+
+function eliminarCancion(e){
+    let id=e.dataset.idCancion
+    let lista=document.getElementById("reproductorList")
+    let database=firebase.database();
+    database.ref("/videos/"+id).set(null)
+    .then(function(){        
+        Materialize.toast("Se ha eliminado una cancion de la lista",4000);
+    })
+
 }

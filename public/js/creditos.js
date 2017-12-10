@@ -17,8 +17,8 @@
                 .done(function(res){                    
                     if (res.success){
                         let database=firebase.database();         
-                        let userKey=localStorage.getItem("userKey"),            
-                            creditosnuevos=parseInt(res.creditos.transaction.amount)                            
+                        let userKey=localStorage.getItem("userKey"),
+                            creditosnuevos=parseInt(res.creditos.transaction.amount)                           
                             database.ref("/usuarios/"+userKey).once('value')
                             .then(snap=>{
                                 let creditos=snap.val().creditos+creditosnuevos
