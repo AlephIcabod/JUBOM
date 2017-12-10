@@ -99,6 +99,7 @@ function obtenerDatosUsuario(user,cb){
         messagingSenderId: "592109724621"
       };
       firebase.initializeApp(config);
+      localStorage.setItem("misVideos","")
       verificarSesion(obtenerDatosUsuario,function(usuario){          
         document.getElementById("creditosU").innerText=usuario.val().creditos
       });

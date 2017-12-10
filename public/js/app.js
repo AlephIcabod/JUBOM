@@ -48,8 +48,17 @@ function BuscarCanciones(query){
 
 function reproducir(el){
     let nombre=el.dataset.name;
-    console.log(nombre)
+    let userKey=localStorage.getItem("userKey")
+    let database=firebase.database();
+    let cola=database.ref("/videos")   
+    database.ref("/usuarios/"+userKey).once('value')
+    .then(snap=>{
+        let uid=snap.val().uid
 
+        let video=cola.push({usuario:uid,video:nombre})        
+        let misvideos=localStorage.getItem("misVideos")
+        localStorage.setItem("misVideos",misvideos+","+video.key)
+    });
 }
 function abrirAlbum(index){
     let id=index.dataset.id;
