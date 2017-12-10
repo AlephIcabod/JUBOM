@@ -1,18 +1,20 @@
-nav
-  .nav-wrapper
-    a(href="/" ,class="brand-logo") JUBOM
-    a#creditosU(href="/creditos",class="right") $
-    a(href="#",data-activates="main-nav",class="button-collapse")
-      i(class="material-icons") menu
-    ul(class="right hide-on-med-and-down")
-      li
-          a Cerrar sesión
-      li
+.navbar-fixed
+  nav
+    .nav-wrapper
+      a(href="/" ,class="brand-logo") JUBOM
+      a#creditosU(href="/creditos",class="right") $
+      a(href="#",data-activates="main-nav",class="button-collapse")
+        i(class="material-icons") menu
+      ul(class="right hide-on-med-and-down")
+        li
+            a Cerrar sesión
+        li
+            a(href="/asociar") Asociar cuentas
+      ul(class="side-nav",id="main-nav")      
+        li
+          a(href="/app") Jubom
+        li
           a(href="/asociar") Asociar cuentas
-    ul(class="side-nav",id="main-nav")      
-      li
-        a(href="/app") Jubom
-      li
-        a(href="/asociar") Asociar cuentas
-      li#btnCerrarS
-          a Cerrar sesión
+        li#btnCerrarS
+            a Cerrar sesión
+    include tabs.pug

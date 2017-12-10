@@ -1,9 +1,11 @@
 var COSTO=5;
 
 const Buscar=(tipo,query)=>{
+    showLoading()
     let content=document.querySelector("#modal .modal-content");
     content.innerHTML=""
-    return fetch(`/busqueda?tipo=${tipo}&query=${query}`).then(res=>res.json())
+    return fetch(`/busqueda?tipo=${tipo}&query=${query}`).then(res=>{
+        hideLoading(); return res.json()})
 }
 
 (function(){      

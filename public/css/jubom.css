@@ -57,7 +57,7 @@ body {
   }
 
 .social{ 
-    background-color:black;
+    background-color:teal;
     margin:0 5px;
 }
 
@@ -71,6 +71,7 @@ body {
 .icon-gmail{
     background-color:#d14836;
 }
+
 
 #creditosU{
     padding-right: .5em;
@@ -90,6 +91,14 @@ body {
     height: 100vh;
     background: rgba(10,10,10,.1);
     align-items: center;
+}
+
+.tabs{
+    box-shadow:0 1px 1px #aaaeee;
+}
+
+.navbar-fixed{
+    z-index: 998;
 }
 @media only screen and (max-width: 992px){
 .modal {
