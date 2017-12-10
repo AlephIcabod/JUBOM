@@ -1,4 +1,6 @@
 const Buscar=(tipo,query)=>{
+    let content=document.querySelector("#modal .modal-content");
+    content.innerHTML=""
     return fetch(`/busqueda?tipo=${tipo}&query=${query}`).then(res=>res.json())
 }
 
@@ -27,14 +29,13 @@ const Buscar=(tipo,query)=>{
 
 function BuscarCanciones(query){
     const canciones=document.getElementById("listCanciones")
-    Buscar("track",query).then(data=>{
-        console.log(data)        
+    Buscar("track",query).then(data=>{        
         let items=data.tracks.items;
         canciones.innerHTML="";
         items.forEach(a => {
             canciones.innerHTML+=`
             <li class="collection-item avatar valign-wrapper cancion"
-            data-id="${a.id}" data-name="${a.name}" onclick="reproducir(this)">
+            data-id="${a.id}" data-name="${a.name} ${a.artists[0].name} ${a.album.name}" onclick="reproducir(this)">
             <img src="${a.album.images[0]?a.album.images[0].url:''}" alt="" class="circle" />
             <div>
             <p class="title"> ${a.name}</p>
@@ -46,10 +47,13 @@ function BuscarCanciones(query){
 }
 
 function reproducir(el){
-    console.log(el)
+    let nombre=el.dataset.name;
+    console.log(nombre)
+
 }
 function abrirAlbum(index){
-    let id=index.dataset.id;    
+    let id=index.dataset.id;
+    let album=index.dataset.album;    
     const Loading=document.getElementById("loading")
     let content=document.querySelector("#modal .modal-content")
     Loading.classList.remove('hide')
@@ -61,7 +65,7 @@ function abrirAlbum(index){
         <ul class="collection">`
         d.items.forEach(i=>{
             content.innerHTML+=`
-            <li class="collection-item avatar valign-wrapper cancion" onclick="reproducir(this)" data-name="${i.name}">              
+            <li class="collection-item avatar valign-wrapper cancion" onclick="reproducir(this)" data-name="${i.name} ${i.artists[0].name} ${album}">              
               <div>
                 <p class="title">${i.name}</p>              
                 <small> ${i.artists[0].name} -- $5 </small>
@@ -89,7 +93,7 @@ function BuscarAlbums(query){
         const items=data.albums.items
         items.forEach((i,j)=>{
             lista.innerHTML+=`  
-            <li class="collapsible-header collection-item avatar valign-wrapper" data-id="${i.id}" onclick="abrirAlbum(this)" data-image=${i.images[0]?i.images[0].url:''}>
+            <li class="collapsible-header collection-item avatar valign-wrapper" data-id="${i.id}" data-album="${i.name}" onclick="abrirAlbum(this)" data-image=${i.images[0]?i.images[0].url:''}>
               <img src="${i.images[0]?i.images[0].url:''}" alt="" class="circle"/>
               <div>
               <p class="title"> ${i.name}</p>
@@ -108,7 +112,8 @@ function BuscarAlbums(query){
 
 
 function abrirArtista(el){
-    let id=el.dataset.id;    
+    let id=el.dataset.id;
+    let artista=el.dataset.artista;    
     const Loading=document.getElementById("loading")
     let content=document.querySelector("#modal .modal-content")
     Loading.classList.remove('hide')
@@ -121,7 +126,7 @@ function abrirArtista(el){
         <ul class="collection">`
         d.tracks.forEach(i=>{
             content.innerHTML+=`
-            <li class="collection-item avatar valign-wrapper cancion" onclick="reproducir(this)" data-name="${i.name}">              
+            <li class="collection-item avatar valign-wrapper cancion" onclick="reproducir(this)" data-name="${i.name} ${i.album.name} ${artista}">              
               <div>
                 <p class="title">${i.name}</p>              
                 <small> ${i.album.name} -- $5 </small>
@@ -145,7 +150,7 @@ function BuscarArtists(query){
         items.forEach(a => {
             artistas.innerHTML+=`
             <li class="collection-item avatar valign-wrapper artista"
-            data-id="${a.id}" onclick="abrirArtista(this)">
+            data-id="${a.id}" data-artista="${a.name}" onclick="abrirArtista(this)">
             <img src="${a.images[0]?a.images[0].url:''}" alt="" class="circle" />
             <span class="title"> ${a.name}</span>
 
