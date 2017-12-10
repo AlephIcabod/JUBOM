@@ -1,85 +1,27 @@
-form
+div
   .input-field
     i.material-icons.prefix search
     input#buscarAlbum(type="search")
     label(for="buscarAlbum") Buscar
-//ul.collection
-    li.collection-item.avatar.album
-      img(src="http://www.sopitas.com/wp-content/uploads/2015/05/letitbe-e1431108985814.jpg", alt="",class="circle")
-      span.title Let it Be
-      p The Beatles        
-      a(href="#!",class="secondary-content")
-        i.material-icons send
-    li.collection-item.avatar.album
-      img(src="https://thechive.files.wordpress.com/2015/11/hidden-messages-in-famous-album-covers-11-photos-9.jpg?quality=85&strip=info&w=920&resize=474%2C474", alt="",class="circle")
-      span.title Revolver 9
-      p The Beatles
-      a(href="#!",class="secondary-content")
-        i.material-icons send
-    li.collection-item.avatar.album
-      img(src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/Help.jpg/220px-Help.jpg", alt="",class="circle")
-      span.title Help
-      p The Beatles
-      a(href="#!",class="secondary-content")
-        i.material-icons send
-ul.collapsible.collection(data-collapsible="accordion")
-  li
-    .collapsible-header.collection-item.avatar.valign-wrapper
-      img(src="http://www.sopitas.com/wp-content/uploads/2015/05/letitbe-e1431108985814.jpg", alt="",class="circle")
-      span.title Let it Be
-      p The Beatles
-    .collapsible-body
-      p Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolorum, et quas, eius blanditiis tenetur rem, deserunt aspernatur quo totam maiores consequatur consequuntur nobis neque modi cum iste veritatis! Adipisci.
-      ul.collection
-        li.collection-item
-        div Cancion 1
-            a(href="#",class="secondary-content")
-                i.material-icons play_arrow
-        li.collection-item
-        div Cancion 2
-            a(href="#",class="secondary-content")
-                i.material-icons play_arrow
-        li.collection-item
-        div Cancion 3
-            a(href="#",class="secondary-content")
-                i.material-icons play_arrow
-  li
-    .collapsible-header.collection-item.avatar.valign-wrapper
-      img(src="https://thechive.files.wordpress.com/2015/11/hidden-messages-in-famous-album-covers-11-photos-9.jpg?quality=85&strip=info&w=920&resize=474%2C474", alt="",class="circle")
-      span.title Revolver 9
-      p The Beatles
-    .collapsible-body
-      p Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolorum, et quas, eius blanditiis tenetur rem, deserunt aspernatur quo totam maiores consequatur consequuntur nobis neque modi cum iste veritatis! Adipisci.
-      ul.collection
-        li.collection-item
-        div Cancion 1
-            a(href="#",class="secondary-content")
-                i.material-icons play_arrow
-        li.collection-item
-        div Cancion 2
-            a(href="#",class="secondary-content")
-                i.material-icons play_arrow
-        li.collection-item
-        div Cancion 3
-            a(href="#",class="secondary-content")
-                i.material-icons play_arrow
-  li
-    .collapsible-header.collection-item.avatar.valign-wrapper
-      img(src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/Help.jpg/220px-Help.jpg", alt="",class="circle")
-      span.title Help
-      p The Beatles      
-    .collapsible-body
-      p Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolorum, et quas, eius blanditiis tenetur rem, deserunt aspernatur quo totam maiores consequatur consequuntur nobis neque modi cum iste veritatis! Adipisci.
-      ul.collection
-        li.collection-item
-        div Cancion 1
-            a(href="#",class="secondary-content")
-                i.material-icons play_arrow
-        li.collection-item
-        div Cancion 2
-            a(href="#",class="secondary-content")
-                i.material-icons play_arrow
-        li.collection-item
-        div Cancion 3
-            a(href="#",class="secondary-content")
-                i.material-icons play_arrow
+#listAlbums    
+  ul.collapsible.collection(data-collapsible="accordion")
+    li
+      .collapsible-header.collection-item.avatar.valign-wrapper
+        img(src="http://www.sopitas.com/wp-content/uploads/2015/05/letitbe-e1431108985814.jpg", alt="",class="circle")
+        span.title Let it Be
+        p The Beatles
+      .collapsible-body
+        p Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dolorum, et quas, eius blanditiis tenetur rem, deserunt aspernatur quo totam maiores consequatur consequuntur nobis neque modi cum iste veritatis! Adipisci.
+        ul.collection
+          li.collection-item
+          div Cancion 1
+              a(href="#",class="secondary-content")
+                  i.material-icons play_arrow
+          li.collection-item
+          div Cancion 2
+              a(href="#",class="secondary-content")
+                  i.material-icons play_arrow
+          li.collection-item
+          div Cancion 3
+              a(href="#",class="secondary-content")
+                  i.material-icons play_arrow

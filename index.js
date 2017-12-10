@@ -5,7 +5,8 @@ cookieParser = require('cookie-parser'),
 bodyParser = require('body-parser'),
 cors = require("cors"),
 app = express(),
-pago=require("./pago")
+pago=require("./pago"),
+spotify=require("./spotify")
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,7 +38,7 @@ app.get("/creditos",(req,res)=>{
 })
 
 app.use("/checkout",pago)
-
+app.use("/busqueda",spotify)
 
 app.use(express.static("public"))
 

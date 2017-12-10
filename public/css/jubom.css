@@ -1,8 +1,13 @@
 .cancion{
     justify-content: space-between;
+    border-bottom: 1px solid #ddd;
 }
 .cancion a{
     color:rgb(38, 166, 154);
+}
+
+.cancion div>p{
+    margin:2px;
 }
 
 body {

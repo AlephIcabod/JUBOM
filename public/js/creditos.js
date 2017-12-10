@@ -26,9 +26,11 @@
                                     nombre:snap.val().nombre,
                                     uid:snap.val().uid,
                                     creditos:creditos
+                                }).then((r)=>{
+                                    Materialize.toast('Se han actualizado sus creditos', 4000) 
+                                    window.location.href="/app"
                                 })
-                            })
-                            
+                            })                            
                     }else{
                         alert("Hubo un error")
                     }

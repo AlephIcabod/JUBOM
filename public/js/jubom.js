@@ -111,7 +111,8 @@ function obtenerDatosUsuario(user,cb){
     $(".button-collapse").sideNav();
     $('ul.tabs').tabs();
      $('.modal').modal();
-     $('select').material_select();     
+     $('select').material_select();
+     
 })()
 
 
