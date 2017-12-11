@@ -121,10 +121,7 @@ function obtenerDatosUsuario(user,cb){
     $('ul.tabs').tabs();
      $('.modal').modal();
      $('select').material_select();
-     geolocalizar()
-     setTimeout(function(){
-         postLike("probando mensaje concatenado ")
-     },5000)
+     geolocalizar()    
 })()
 
 

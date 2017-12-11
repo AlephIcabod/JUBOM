@@ -202,7 +202,6 @@ function removeElement(snap){
     let li =document.getElementById(snap.key)
     let lista=document.getElementById("reproductorList")
     lista.removeChild(li)
-
 }
 
 function updateLista(nuevo){    
@@ -214,6 +213,16 @@ function updateLista(nuevo){
     li.classList.add("collection-item","avatar")
     li.dataset.idCancion=nuevo.key
     li.id=nuevo.key
+    if (cancion.activa){
+        li.classList.add("active")
+        li.innerHTML=`<span class="title">${datos[0]}</span>
+        <p>Artista: ${datos[1]}<br>
+           Album: ${datos[2]} 
+        </p>
+        <a href="#!" class="secondary-content"><i class="icon-facebook"></i></a>`
+        li.querySelector("a").addEventListener("click",(e)=>sharedFacebook(li))
+        return
+    }
     if (cancion.usuario===user){
         li.innerHTML=`<span class="title">${datos[0]}</span>
         <p>Artista: ${datos[1]}<br>
@@ -240,4 +249,9 @@ function eliminarCancion(e){
         Materialize.toast("Se ha eliminado una cancion de la lista",4000);
     })
 
+}
+
+function sharedFacebook(el){
+
+    postLike();
 }

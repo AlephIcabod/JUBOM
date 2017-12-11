@@ -34,34 +34,14 @@ window.fbAsyncInit = function() {
 
 
 
-function postLike(msg,hg) {
-  /*FB.api(
-     'https://graph.facebook.com/me/og.likes',
-     'post',
-     { object: "probando algo de post",
-       privacy: {'value': 'SELF'} },
-     function(response) {
-       if (!response) {
-         alert('Error occurred.');
-       } else if (response.error) {
-         
-           console.log('Error: ' + response.error.message);
-       } else {
-         console.log(
-           '<a href=\"https://www.facebook.com/me/activity/' +
-           response.id + '\">' +
-           'Story created.  ID is ' +
-           response.id + '</a>');
-       }
-     }
-  );*/
-
+function postLike(msg,hg) {  
+    hg==undefined?"":hg;
   FB.ui({
     method: 'share',
     mobile_iframe: true,
     display:"touch",    
     href: 'https://jubom.herokuapp.com',
-    hashtag:"#JUBOM "+hg?hg:"",
+    hashtag:"#JUBOM "+hg,
     quote:msg
   }, function(response){
 
