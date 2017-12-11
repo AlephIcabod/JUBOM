@@ -121,7 +121,7 @@ function obtenerDatosUsuario(user,cb){
     $('ul.tabs').tabs();
      $('.modal').modal();
      $('select').material_select();
-     geolocalizar()    
+     //geolocalizar()    
 })()
 
 
