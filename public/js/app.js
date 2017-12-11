@@ -257,8 +257,10 @@ function eliminarCancion(e){
 }
 
 function changeActive(snap){
-    let li =document.getElementById(snap.key)
-    console.log(snap.val())
+    let li =document.getElementById(snap.key),
+    cancion=snap.val(),
+    datos=cancion.text.split("#&")
+    let user=localStorage.getItem("userID")
     if (snap.val().activa){
         li.classList.add("active")
         li.innerHTML=`
@@ -270,10 +272,23 @@ function changeActive(snap){
         <a href="#!" class="secondary-content">
         <span class="share icon-facebook"></span>    </a>`
         li.querySelector("a").addEventListener("click",(e)=>sharedFacebook(li))
+    }    
+    else{
+        li.classList.remove("active")
+        if (cancion.usuario===user){
+            li.innerHTML=`<span class="title">${datos[0]}</span>
+            <p>Artista: ${datos[1]}<br>
+               Album: ${datos[2]} 
+            </p>
+            <a href="#!" class="secondary-content"><i class="material-icons red-text">delete</i></a>`
+            li.querySelector("a").removeEventListener("click")
+        }else{
+            li.innerHTML=`<span class="title">${datos[0]}</span>
+            <p>Artista: ${datos[1]}<br>
+               Album: ${datos[2]} 
+            </p>`
+        }
     }
-    
-    else
-    li.classList.remove("active")
 }
 
 function sharedFacebook(el){    
