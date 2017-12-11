@@ -102,6 +102,11 @@ body {
 .navbar-fixed{
     z-index: 998;
 }
+
+.share.icon-facebook{
+    font-size: 2em;
+    background-color: transparent;
+}
 @media only screen and (max-width: 992px){
 .modal {
     width: 95%;

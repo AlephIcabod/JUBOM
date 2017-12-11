@@ -34,8 +34,7 @@ window.fbAsyncInit = function() {
 
 
 
-function postLike(msg,hg) {  
-    hg==undefined?"":hg;
+function postLike(msg,hg) {      
   FB.ui({
     method: 'share',
     mobile_iframe: true,

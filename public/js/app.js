@@ -212,15 +212,19 @@ function updateLista(nuevo){
     let user=localStorage.getItem("userID")
     li.classList.add("collection-item","avatar")
     li.dataset.idCancion=nuevo.key
-    li.id=nuevo.key
+    li.id=nuevo.key    
     if (cancion.activa){
         li.classList.add("active")
-        li.innerHTML=`<span class="title">${datos[0]}</span>
+        li.innerHTML=`
+        <img src="img/sound.png" class="circle">
+        <span class="title">${datos[0]}</span>
         <p>Artista: ${datos[1]}<br>
            Album: ${datos[2]} 
         </p>
-        <a href="#!" class="secondary-content"><i class="icon-facebook"></i></a>`
+        <a href="#!" class="secondary-content">
+        <span class="share icon-facebook"></span>    </a>`
         li.querySelector("a").addEventListener("click",(e)=>sharedFacebook(li))
+        lista.appendChild(li)
         return
     }
     if (cancion.usuario===user){
@@ -251,7 +255,6 @@ function eliminarCancion(e){
 
 }
 
-function sharedFacebook(el){
-
-    postLike();
+function sharedFacebook(el){    
+    postLike("Escuchando "+el.querySelector(".title").innerText+" :D","#Mùsica");
 }
