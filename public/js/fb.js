@@ -59,7 +59,8 @@ function postLike(msg,hg) {
   FB.ui({
     method: 'share',
     mobile_iframe: true,
-    display:"touch",        
+    display:"touch",    
+    href: 'https://jubom.herokuapp.com',
     hashtag:"#JUBOM "+hg?hg:"",
     quote:msg
   }, function(response){
