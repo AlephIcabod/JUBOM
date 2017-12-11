@@ -59,10 +59,10 @@ function postLike(msg) {
   FB.ui({
     method: 'share_open_graph',
     action_type:"og.likes",
-    //mobile_iframe: true,
+    mobile_iframe: true,
     display:"touch",    
     //href: 'https://developers.facebook.com/docs/',
-    properties:JSON.stringify({object:"Hola desde jubom "+msg})
+    action_properties:JSON.stringify({object:"Hola desde jubom "+msg})
   }, function(response){
 
     console.log(response)
