@@ -62,7 +62,7 @@ function postLike(msg) {
     mobile_iframe: true,
     display:"touch",    
     //href: 'https://developers.facebook.com/docs/',
-    action_properties:JSON.stringify({object:"jubom.herokuapp.com",start_time:new Date()})
+    action_properties:JSON.stringify({object:"https://jubom.herokuapp.com",start_time:new Date()})
   }, function(response){
 
     console.log(response)
