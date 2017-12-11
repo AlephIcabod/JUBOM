@@ -34,7 +34,7 @@ window.fbAsyncInit = function() {
 
 
 
-function postLike(msg) {
+function postLike(msg,hg) {
   /*FB.api(
      'https://graph.facebook.com/me/og.likes',
      'post',
@@ -57,12 +57,12 @@ function postLike(msg) {
   );*/
 
   FB.ui({
-    method: 'share_open_graph',
-    action_type:"og.likes",
+    method: 'share',
     mobile_iframe: true,
     display:"touch",    
-    //href: 'https://developers.facebook.com/docs/',
-    action_properties:JSON.stringify({object:"https://jubom.herokuapp.com"})
+    href: 'https://developers.facebook.com/docs/',
+    hashtag:"#JUBOM"+hg,
+    quote:msg
   }, function(response){
 
     console.log(response)
