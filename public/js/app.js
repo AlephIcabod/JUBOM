@@ -196,6 +196,7 @@ function initLista(){
     showLoading();    
     cola.on("child_added",function(snap){updateLista(snap)})
     cola.on("child_removed",function(snap){removeElement(snap)})
+    cola.on("child_changed", function(snapshot) {changeActive(snap)});
 }
 
 function removeElement(snap){
@@ -255,6 +256,16 @@ function eliminarCancion(e){
 
 }
 
+function changeActive(snap){
+    let li =document.getElementById(snap.key)
+    console.log(snap.val())
+    if (snap.val().activa)
+    li.classList.add("active")
+    else
+    li.classList.remove("active")
+}
+
 function sharedFacebook(el){    
     postLike("Escuchando "+el.querySelector(".title").innerText+" :D","#Mùsica");
 }
+
