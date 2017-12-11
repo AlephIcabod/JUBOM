@@ -34,7 +34,7 @@ window.fbAsyncInit = function() {
 
 
 
-function postLike() {
+function postLike(msg) {
   /*FB.api(
      'https://graph.facebook.com/me/og.likes',
      'post',
@@ -57,10 +57,12 @@ function postLike() {
   );*/
 
   FB.ui({
-    method: 'share',
-    mobile_iframe: true,
+    method: 'share_open_graph',
+    action_type:"og.likes",
+    //mobile_iframe: true,
     display:"touch",    
-    href: 'https://developers.facebook.com/docs/',
+    //href: 'https://developers.facebook.com/docs/',
+    properties:JSON.stringify({object:"Hola desde jubom "+msg})
   }, function(response){
 
     console.log(response)
@@ -69,8 +71,4 @@ function postLike() {
 
 }
 
-$(document).ready(function(){
-    setTimeout(function(){
-    console.log("publicando")
-    postLike();},5000)
-})
+
