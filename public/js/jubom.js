@@ -122,6 +122,7 @@ function obtenerDatosUsuario(user,cb){
      $('.modal').modal();
      $('select').material_select();
      geolocalizar()
+     
 })()
 
 
