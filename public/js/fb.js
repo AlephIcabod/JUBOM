@@ -62,7 +62,7 @@ function postLike(msg) {
     mobile_iframe: true,
     display:"touch",    
     //href: 'https://developers.facebook.com/docs/',
-    action_properties:JSON.stringify({object:"Hola desde jubom "+msg})
+    action_properties:"Hola desde jubom "+msg
   }, function(response){
 
     console.log(response)
