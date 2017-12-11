@@ -259,8 +259,19 @@ function eliminarCancion(e){
 function changeActive(snap){
     let li =document.getElementById(snap.key)
     console.log(snap.val())
-    if (snap.val().activa)
-    li.classList.add("active")
+    if (snap.val().activa){
+        li.classList.add("active")
+        li.innerHTML=`
+        <img src="img/sound.png" class="circle">
+        <span class="title">${datos[0]}</span>
+        <p>Artista: ${datos[1]}<br>
+           Album: ${datos[2]} 
+        </p>
+        <a href="#!" class="secondary-content">
+        <span class="share icon-facebook"></span>    </a>`
+        li.querySelector("a").addEventListener("click",(e)=>sharedFacebook(li))
+    }
+    
     else
     li.classList.remove("active")
 }
