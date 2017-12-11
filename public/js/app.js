@@ -196,7 +196,7 @@ function initLista(){
     showLoading();    
     cola.on("child_added",function(snap){updateLista(snap)})
     cola.on("child_removed",function(snap){removeElement(snap)})
-    cola.on("child_changed", function(snapshot) {changeActive(snap)});
+    cola.on("child_changed", function(snap) {changeActive(snap)});
 }
 
 function removeElement(snap){
