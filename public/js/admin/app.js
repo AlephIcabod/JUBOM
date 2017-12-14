@@ -194,6 +194,9 @@ function pintarAdminConsola(){
         <label for="costo">Costo de la reproducción:</label>
         <input type="number" name="costo" id="costo" required>
 
+        <label for="totalReproducciones">Ingreso del día</label>
+        <input type="number" name="totalReproducciones" id="totReproducciones" disabled>
+
         <input type="submit" value="Aceptar" class="btn">
     </form>
     </div>`
@@ -207,6 +210,20 @@ function cambiarParametros(){
     let creditos = database.ref("/admin/creditos");
     let costoHTML = document.getElementById("costo");
     let creditosHTML = document.getElementById("creditos");
+
+    let totReproduc = document.getElementById("totReproducciones");
+    let fecha = new Date();
+    let indexFecha = `${fecha.getDate()}-${fecha.getMonth()+1}-${fecha.getFullYear()}`;
+    let datosReproducciones = database.ref("/transacciones/" + indexFecha);
+
+    datosReproducciones.on('value',snap=>{
+        if(snap.val().totalTransacciones){
+            totReproduc.value = snap.val().totalTransacciones;
+        }else{
+            totReproduc.value = 0;
+        }
+    })
+    
     costo.on('value',snap=>{
         costoHTML.value = snap.val();
     })

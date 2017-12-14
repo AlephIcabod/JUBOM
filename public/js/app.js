@@ -77,6 +77,24 @@ function reproducir(el) {
                     Materialize.toast("Se ha agregado una cancion a la lista", 4000);
                     $("#modal").modal("close")
                 })
+                let fecha = new Date();
+                let indexFecha = `${fecha.getDate()}-${fecha.getMonth()+1}-${fecha.getFullYear()}`;
+                database.ref("/transacciones/" + indexFecha).once('value')
+                    .then(valores => {
+                        let totalTrans;
+                        let transac;
+                        if(valores.val()!=null){
+                            totalTrans = parseInt(valores.val().totalTransacciones) + COSTO;
+                            transac = parseInt(valores.val().transacciones)+1;
+                        }else{
+                            totalTrans = COSTO;
+                            transac = 1;
+                        }
+                        database.ref("/transacciones/" + indexFecha).set({
+                            totalTransacciones: totalTrans,
+                            transacciones: transac
+                        })
+                    })
             } else {
                 Materialize.toast("No tienes suficientes creditos para agregar canciones, compra más créditos", 4000);
                 $("#modal").modal("close")
@@ -210,10 +228,10 @@ function initLista() {
     cola.on("child_changed", function (snap) {
         changeActive(snap)
     });
-    costoCancion.once('value').then(snap=>{
+    costoCancion.once('value').then(snap => {
         COSTO = snap.val();
     });
-    costoCancion.on('value',snap=>{
+    costoCancion.on('value', snap => {
         COSTO = snap.val();
     })
 }
