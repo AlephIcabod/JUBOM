@@ -1,9 +1,13 @@
 const btnCerrar=document.getElementById("btnCerrarS")
 const Loading=document.getElementById("loading")
 const Content=document.getElementById("content")
-var usuario
+var usuario;
+var CREDITOSINICIALES;
 
 const verificarSesion=(cb,cb2)=>{
+    firebase.database().ref("/admin/creditos").once('value').then(snap=>{
+        CREDITOSINICIALES = snap.val();
+    });
     firebase.auth().onAuthStateChanged(function(user) {        
         if (user) {            
             Loading.classList.add("hide")      
@@ -89,7 +93,7 @@ function obtenerDatosUsuario(user,cb){
             usuarioEncontrado=usuario.push({
                 uid:user.uid,
                 nombre:user.displayName||user.email||user.phoneNumber,
-                creditos:50
+                creditos:CREDITOSINICIALES
             })
             
         }
@@ -97,6 +101,10 @@ function obtenerDatosUsuario(user,cb){
         localStorage.setItem("userID",usuarioEncontrado.val().uid)
         if (cb) cb(usuarioEncontrado);
     })
+    database.ref("/admin/creditos").on('value',snap=>{
+        CREDITOSINICIALES = snap.val();
+    })
+
 }
 (function (){
     var config = {
