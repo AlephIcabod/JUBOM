@@ -151,6 +151,7 @@ function loginAdmin(){
 
 
 function pintarLogin(){
+    document.querySelector("main").classList.add("main")
     let container=document.getElementById("containerMain")
     container.innerHTML=`
     <form onsubmit="return false">
@@ -172,8 +173,20 @@ function pintarLogin(){
 }
 
 function pintarAdminConsola(){
+    document.querySelector("main").classList.remove("main")
     let container=document.getElementById("containerMain")
-    container.innerHTML=`<h3>Página de administración de Costos de Reproducción</h3>
+    container.innerHTML=`
+    <nav>
+        <div class="nav-wrapper">
+        <a href="/admin" class="brand-logo left">Jubom</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/reproductor">Reproduccion</a></li>
+        <li><a onclick="cerrarSesion()">Salir</a></li>        
+        </ul>
+        </div>
+    </nav>
+    <div class="container">
+    <h3 class="center">Página de administración de Costos de Reproducción</h3>
     <form id="principal">
         <label for="creditos">Créditos por defecto: </label>
         <input type="number" name="creditos" id="creditos" required>
@@ -181,8 +194,9 @@ function pintarAdminConsola(){
         <label for="costo">Costo de la reproducción:</label>
         <input type="number" name="costo" id="costo" required>
 
-        <input type="submit" value="Aceptar">
-    </form>`
+        <input type="submit" value="Aceptar" class="btn">
+    </form>
+    </div>`
 
     cambiarParametros()
 }
@@ -193,10 +207,10 @@ function cambiarParametros(){
     let creditos = database.ref("/admin/creditos");
     let costoHTML = document.getElementById("costo");
     let creditosHTML = document.getElementById("creditos");
-    costo.once('value').then(snap=>{
+    costo.on('value',snap=>{
         costoHTML.value = snap.val();
     })
-    creditos.once('value').then(snap=>{
+    creditos.on('value',snap=>{
         creditosHTML.value = snap.val();
     })
     document.getElementById("principal").addEventListener("submit",event=>{
@@ -206,6 +220,14 @@ function cambiarParametros(){
         database.ref("/admin").set({
             costo:cos,
             creditos:cred
-        })
+        }).then(()=>Materialize.toast("Cambios guardados exitosamente",5000))
     })
+}
+
+
+function cerrarSesion(){
+    firebase.auth().signOut().then(function() {        
+        location.href = "/";    
+    }).catch(function(error) {        
+    });
 }
