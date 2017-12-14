@@ -37,6 +37,15 @@ app.get("/creditos",(req,res)=>{
   res.render("creditos")
 })
 
+app.get("/reproductor",(req,res)=>{
+  res.render("reproductorVideos")
+})
+
+app.get("/admin",(req,res)=>{
+  res.render("admin")
+})
+
+
 app.use("/checkout",pago)
 app.use("/busqueda",spotify)
 
@@ -66,6 +75,8 @@ app.use(function (err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = app;

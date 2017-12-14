@@ -5,7 +5,7 @@ var usuario
 
 const verificarSesion=(cb,cb2)=>{
     firebase.auth().onAuthStateChanged(function(user) {        
-        if (user) {
+        if (user) {            
             Loading.classList.add("hide")      
             Content.classList.remove("hide")            
             if(cb) cb(user,cb2)
