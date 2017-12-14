@@ -118,15 +118,18 @@ let createVideo = (targetId, videoId, height, width) => {
 done=false
 
 const verificarSesion=(cb,cb2)=>{
-    firebase.auth().onAuthStateChanged(function(user) {        
-       console.log(user)
+    firebase.auth().onAuthStateChanged(function(user) {
        if (user){
            if (user.providerData.length==1&&user.providerData[0].providerId=="password"){
-                pintarAdminConsola();
+               if (window.location.pathname=="/admin"){
+                    pintarAdminConsola();
+                }
            }else{
                window.location.href="/app"
            } 
-       }else{
+       }else{ 
+            if(window.location.pathname!="/admin")
+                window.location.href="/admin"         
             pintarLogin();
        }       
     });
@@ -153,13 +156,13 @@ function pintarLogin(){
     <form onsubmit="return false">
         <h3 class="center"> Administración de Jubom</h3>
         <div class="row">
-            <div class="input-field">
+            <div class="input-field text-white">
                 <input id="email" type="email" class="validate">
-                <label for="email"> Correo electronico</label>
+                <label for="email" class=""> Correo electronico</label>
             </div>
             <div class="input-field">
-                <input id="pass" type="password" class="validate">
-                <label for="pass"> Contraseña</label>
+                <input id="pass" type="password" class="validate ">
+                <label for="pass" class=""> Contraseña</label>
             </div>
             <div class="input-field right">
                 <button class="btn" id="btnLogin" onclick="loginAdmin()"> Entrar</button>
@@ -185,21 +188,17 @@ function pintarAdminConsola(){
 }
 
 
-function cambiarParametros(){
-    const database = firebase.database();
+function cambiarParametros(){    
     let costo = database.ref("/admin/costo");
     let creditos = database.ref("/admin/creditos");
     let costoHTML = document.getElementById("costo");
     let creditosHTML = document.getElementById("creditos");
-    
     costo.once('value').then(snap=>{
         costoHTML.value = snap.val();
     })
-    
     creditos.once('value').then(snap=>{
         creditosHTML.value = snap.val();
     })
-    
     document.getElementById("principal").addEventListener("submit",event=>{
         event.preventDefault();
         let cos = parseInt(costoHTML.value);
